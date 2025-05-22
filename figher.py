@@ -10,8 +10,9 @@ que são instâncias de uma classe.
 class Fighter:
     def __init__(self, x, y): #
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
+        self.vel_y
 
-    def move(self):
+    def move(self, screen_width):
         SPEED = 5
         dx = 0 #direita ou esquerda
         dy = 0 #cima ou baixo
@@ -23,11 +24,17 @@ class Fighter:
         if key[pygame.K_d]:
             dx = SPEED #faz o lutador ir para a direita
 
+        #pula
+        if key[pygame.K_W]:
+            self.vel_y = -30 #faz o lutador ir para cima
+
+        dy += self.vel_y #
+
         #confirma presenca do player na tela
         if self.rect.left + dx < 0:
             dx = 0 - self.rect.left
-        #if self.rect.right + dx > SCREEN_WIDTH:
-        #    dx = SCREEN_WIDTH - self.rect.right
+        if self.rect.right + dx > screen_width:
+            dx = screen_width - self.rect.right
 
         #atualza a posição do jogador
         self.rect.x += dx
