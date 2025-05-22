@@ -1,4 +1,4 @@
-import pygame 
+import pygame
 
 """
 A classe de lutador é sobre um conteúdo do sétimo semestre, 
@@ -12,7 +12,7 @@ class Fighter:
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
 
     def move(self):
-        SPEED = 0.6
+        SPEED = 5
         dx = 0 #direita ou esquerda
         dy = 0 #cima ou baixo
         
@@ -22,6 +22,12 @@ class Fighter:
             dx = -SPEED #faz o lutador ir para a esquerda  
         if key[pygame.K_d]:
             dx = SPEED #faz o lutador ir para a direita
+
+        #confirma presenca do player na tela
+        if self.rect.left + dx < 0:
+            dx = 0 - self.rect.left
+        #if self.rect.right + dx > SCREEN_WIDTH:
+        #    dx = SCREEN_WIDTH - self.rect.right
 
         #atualza a posição do jogador
         self.rect.x += dx

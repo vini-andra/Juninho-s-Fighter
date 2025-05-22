@@ -10,6 +10,10 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Juninho's Fighter")
 
+#define a framerate
+clock = pygame.time.Clock()
+fps = 60
+
 #carrega imagem de fundo
 background = pygame.image.load("assets/Background/background1.jpeg").convert_alpha()
 
@@ -25,6 +29,9 @@ player_2 = Fighter(700, 310)
 #loop para manter a janela aberta
 run = True
 while run:
+    
+    #define a framerate
+    clock.tick(fps)
 
     #desenha o fundo
     draw_background()
