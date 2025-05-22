@@ -10,10 +10,12 @@ que são instâncias de uma classe.
 class Fighter:
     def __init__(self, x, y): #
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
-        self.vel_y
+        self.vel_y = 0
+        self.jump = False #se não está pulando, False
 
-    def move(self, screen_width):
+    def move(self, screen_width, screen_height):
         SPEED = 5
+        GRAVITY =  2
         dx = 0 #direita ou esquerda
         dy = 0 #cima ou baixo
         
@@ -24,9 +26,20 @@ class Fighter:
         if key[pygame.K_d]:
             dx = SPEED #faz o lutador ir para a direita
 
-        #pula
-        if key[pygame.K_W]:
-            self.vel_y = -30 #faz o lutador ir para cima
+        # pula
+        if key[pygame.K_w] and self.jump == False: #isso faz com que o lutador pule uma vez
+            self.vel_y = -30  #faz o lutador ir para cima
+            self.jump = True
+
+        #coloca a gravidade
+        self.vel_y += GRAVITY
+
+        """
+        Se colocar apenas o "self.vel_y += GRAVITY", que puxa o objeto para baixo,
+        o objeto vai continuar indo para baixo mesmo que o jogador não esteja pressionando.
+        Por isso, temps que conseguir um jeito de saber se o objeto está no chão ou não.
+        """
+
 
         dy += self.vel_y #
 
@@ -35,6 +48,9 @@ class Fighter:
             dx = 0 - self.rect.left
         if self.rect.right + dx > screen_width:
             dx = screen_width - self.rect.right
+        if self.rect.bottom + dy > screen_height - 110:
+            self.vel_y = 0
+            dy = screen_height - 110 - self.rect.bottom
 
         #atualza a posição do jogador
         self.rect.x += dx

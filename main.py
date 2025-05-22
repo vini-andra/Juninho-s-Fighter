@@ -37,7 +37,7 @@ while run:
     draw_background()
 
     #move os personagens
-    player_1.move(SCREEN_WIDTH)
+    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT)
 
     #desenha os lutadores
     player_1.draw(screen)
