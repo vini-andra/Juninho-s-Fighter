@@ -49,4 +49,4 @@ while run:
     #atualiza a tela
     pygame.display.update()
 
-pygame.quit()
+pygame.quit() 
