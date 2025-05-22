@@ -11,7 +11,7 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Juninho's Fighter")
 
 #carrega imagem de fundo
-background = pygame.image.load("assets/Background/background1.png").convert_alpha()
+background = pygame.image.load("assets/Background/background1.jpeg").convert_alpha()
 
 #função para desenhar o fundo
 def draw_background():
@@ -34,7 +34,7 @@ while run:
     player_2.move()
 
     #desenha os lutadores
-    player_1.draw()
+    player_1.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -43,5 +43,4 @@ while run:
     #atualiza a tela
     pygame.display.update()
 
-#sai do pygame
 pygame.quit()

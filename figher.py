@@ -12,7 +12,7 @@ class Fighter:
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
 
     def move(self):
-        SPEED = 10
+        SPEED = 0.6
         dx = 0 #direita ou esquerda
         dy = 0 #cima ou baixo
         
@@ -28,4 +28,4 @@ class Fighter:
         self.rect.y += dy
 
     def draw(self, surface):    #desenha o personagem
-        pygame.draw.rect(surface, (255, 0, 0), self.rect) #(255, 0, 0) é o vódigo da cor
+        pygame.draw.rect(surface, (255, 0, 0), self.rect) #(255, 0, 0) é o código da cor
