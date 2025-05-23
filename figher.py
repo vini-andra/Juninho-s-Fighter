@@ -50,6 +50,7 @@ class Fighter:
             dx = screen_width - self.rect.right
         if self.rect.bottom + dy > screen_height - 110:
             self.vel_y = 0
+            self.jump = False
             dy = screen_height - 110 - self.rect.bottom
 
         #atualza a posição do jogador
