@@ -23,8 +23,8 @@ def draw_background():
     screen.blit(scaled_background, (0, 0))
 
 #cria instâncias de jogador
-player_1 = Fighter(200, 310) #posição x e y, para aparecer na tela
-player_2 = Fighter(700, 310)
+player_1 = Fighter(200, 300) #posição x e y, para aparecer na tela
+player_2 = Fighter(700, 300)
 
 #loop para manter a janela aberta
 run = True
@@ -37,7 +37,7 @@ while run:
     draw_background()
 
     #move os personagens
-    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen)
 
     #desenha os lutadores
     player_1.draw(screen)
