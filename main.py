@@ -27,7 +27,7 @@ player_1 = Fighter(200, 300) #posição x e y, para aparecer na tela
 player_2 = Fighter(700, 300)
 
 #loop para manter a janela aberta
-run = True
+run = True  
 while run:
     
     #define a framerate
@@ -37,10 +37,11 @@ while run:
     draw_background()
 
     #move os personagens
-    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen)
+    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_2)
 
     #desenha os lutadores
     player_1.draw(screen)
+    player_2.draw(screen)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

@@ -12,9 +12,10 @@ class Fighter:
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
         self.vel_y = 0
         self.jump = False #se não está pulando, False
+        self.attacking = False
         self.attack_type = 0
 
-    def move(self, screen_width, screen_height, surface):
+    def move(self, screen_width, screen_height, surface, target):
         SPEED = 5
         GRAVITY =  2
         dx = 0 #direita ou esquerda
@@ -34,7 +35,7 @@ class Fighter:
 
         #ataque
         if key[pygame.K_r] or key[pygame.K_t]: 
-            self.attack(surface)
+            self.attack(surface, target)
             #determina qual tipo de ataque foi usado
             if key[pygame.K_r]:
                 self.attack_type = 1
@@ -66,8 +67,11 @@ class Fighter:
         self.rect.x += dx
         self.rect.y += dy
 
-    def attack(self, surface):
+    def attack(self, surface, target):
         attacking_rect = pygame.Rect(self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
+        if attacking_rect.colliderect(target.rect):
+            print("UAUUUU")
+
         pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
     def draw(self, surface):    #desenha o personagem
