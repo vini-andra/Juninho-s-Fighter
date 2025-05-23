@@ -12,8 +12,9 @@ class Fighter:
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
         self.vel_y = 0
         self.jump = False #se não está pulando, False
+        self.attack_type = 0
 
-    def move(self, screen_width, screen_height):
+    def move(self, screen_width, screen_height, surface):
         SPEED = 5
         GRAVITY =  2
         dx = 0 #direita ou esquerda
@@ -27,9 +28,18 @@ class Fighter:
             dx = SPEED #faz o lutador ir para a direita
 
         # pula
-        if key[pygame.K_w] and self.jump == False: #isso faz com que o lutador pule uma vez
+        if key[pygame.K_w] and self.jump == False: #quando pula uma vez, a opção de pulo fica desabilitada
             self.vel_y = -30  #faz o lutador ir para cima
             self.jump = True
+
+        #ataque
+        if key[pygame.K_r] or key[pygame.K_t]: 
+            self.attack(surface)
+            #determina qual tipo de ataque foi usado
+            if key[pygame.K_r]:
+                self.attack_type = 1
+            if key[pygame.K_t]:
+                self.attack_type = 2
 
         #coloca a gravidade
         self.vel_y += GRAVITY
@@ -40,7 +50,6 @@ class Fighter:
         Por isso, temps que conseguir um jeito de saber se o objeto está no chão ou não.
         """
 
-
         dy += self.vel_y #
 
         #confirma presenca do player na tela
@@ -50,12 +59,16 @@ class Fighter:
             dx = screen_width - self.rect.right
         if self.rect.bottom + dy > screen_height - 110:
             self.vel_y = 0
-            self.jump = False
+            self.jump = False #ativa o pulo quando o lutador toca o chão
             dy = screen_height - 110 - self.rect.bottom
 
         #atualza a posição do jogador
         self.rect.x += dx
         self.rect.y += dy
+
+    def attack(self, surface):
+        attacking_rect = pygame.Rect(self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
+        pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
     def draw(self, surface):    #desenha o personagem
         pygame.draw.rect(surface, (255, 0, 0), self.rect) #(255, 0, 0) é o código da cor
