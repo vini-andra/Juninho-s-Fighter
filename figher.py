@@ -14,33 +14,34 @@ class Fighter:
         self.jump = False #se não está pulando, False
         self.attacking = False
         self.attack_type = 0
+        self.health = 100
 
     def move(self, screen_width, screen_height, surface, target):
         SPEED = 5
         GRAVITY =  2
         dx = 0 #direita ou esquerda
         dy = 0 #cima ou baixo
-        
+
         key = pygame.key.get_pressed()  # corrigido aqui
-
-        if key[pygame.K_a]:
-            dx = -SPEED #faz o lutador ir para a esquerda  
-        if key[pygame.K_d]:
-            dx = SPEED #faz o lutador ir para a direita
-
-        # pula
-        if key[pygame.K_w] and self.jump == False: #quando pula uma vez, a opção de pulo fica desabilitada
-            self.vel_y = -30  #faz o lutador ir para cima
-            self.jump = True
-
-        #ataque
-        if key[pygame.K_r] or key[pygame.K_t]: 
-            self.attack(surface, target)
-            #determina qual tipo de ataque foi usado
-            if key[pygame.K_r]:
-                self.attack_type = 1
-            if key[pygame.K_t]:
-                self.attack_type = 2
+        
+        #pode fazer outras acoes se nao estiver atacando
+        if self.attacking == False:
+            if key[pygame.K_a]:
+                dx = -SPEED #faz o lutador ir para a esquerda  
+            if key[pygame.K_d]:
+                dx = SPEED #faz o lutador ir para a direita
+            # pula
+            if key[pygame.K_w] and self.jump == False: #quando pula uma vez, a opção de pulo fica desabilitada
+                self.vel_y = -30  #faz o lutador ir para cima
+                self.jump = True
+            #ataque
+            if key[pygame.K_r] or key[pygame.K_t]: 
+                self.attack(surface, target)
+                #determina qual tipo de ataque foi usado
+                if key[pygame.K_r]:
+                    self.attack_type = 1
+                if key[pygame.K_t]:
+                    self.attack_type = 2
 
         #coloca a gravidade
         self.vel_y += GRAVITY
@@ -68,9 +69,10 @@ class Fighter:
         self.rect.y += dy
 
     def attack(self, surface, target):
+        self.attacking = True
         attacking_rect = pygame.Rect(self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
         if attacking_rect.colliderect(target.rect):
-            print("UAUUUU")
+            target.health -= 10
 
         pygame.draw.rect(surface, (0, 255, 0), attacking_rect)
 
