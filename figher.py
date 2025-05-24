@@ -9,6 +9,7 @@ que são instâncias de uma classe.
 """
 class Fighter:
     def __init__(self, x, y): #
+        self.flip = False
         self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
         self.vel_y = 0
         self.jump = False #se não está pulando, False
@@ -64,13 +65,19 @@ class Fighter:
             self.jump = False #ativa o pulo quando o lutador toca o chão
             dy = screen_height - 110 - self.rect.bottom
 
+        #certifica que os players olhem um para o outro
+        if target.rect.centerx > self.rect.centerx:
+            self.flip = False
+        else:
+            self.flip = True
+
         #atualza a posição do jogador
         self.rect.x += dx
-        self.rect.y += dy
+        self.rect.y += dy 
 
     def attack(self, surface, target):
         self.attacking = True
-        attacking_rect = pygame.Rect(self.rect.centerx, self.rect.y, 2 * self.rect.width, self.rect.height)
+        attacking_rect = pygame.Rect(self.rect.centerx - (2 * self.rect.width * self.flip), self.rect.y, 2 * self.rect.width, self.rect.height)
         if attacking_rect.colliderect(target.rect):
             target.health -= 10
 
