@@ -37,7 +37,7 @@ def draw_health_bar(health, x, y):
 
 #cria instâncias de jogador
 player_1 = Fighter(200, 300) #posição x e y, para aparecer na tela
-player_2 = Fighter(700, 300)
+player_2 = Fighter(700, 310)
 
 #loop para manter a janela aberta
 run = True  
@@ -55,8 +55,8 @@ while run:
     
 
     #move os personagens
-    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_1)
-    #player_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_2)
+    player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_2)
+    #player_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_1)
 
     #desenha os lutadores
     player_1.draw(screen)
