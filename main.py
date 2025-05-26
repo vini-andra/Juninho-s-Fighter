@@ -36,7 +36,7 @@ def draw_health_bar(health, x, y):
     pygame.draw.rect(screen, YELLOW, (x, y, 400 * ratio, 30))
 
 #cria instâncias de jogador
-player_1 = Fighter(200, 300) #posição x e y, para aparecer na tela
+player_1 = Fighter(200, 310) #posição x e y, para aparecer na tela
 player_2 = Fighter(700, 310)
 
 #loop para manter a janela aberta
