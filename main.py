@@ -50,8 +50,8 @@ while run:
     draw_background()
     
     #mostra os status do personagem
-    draw_health_bar(player_2.health, 20, 20)
-    draw_health_bar(player_1.health, 580, 20)
+    draw_health_bar(player_1.health, 20, 20)
+    draw_health_bar(player_2.health, 580, 20)
     
 
     #move os personagens

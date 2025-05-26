@@ -8,9 +8,10 @@ A programação orientada a objeto serve para criar classes e objetos,
 que são instâncias de uma classe.
 """
 class Fighter:
-    def __init__(self, x, y): #
+    def __init__(self, player, x, y): #
+        self.player = player
         self.flip = False
-        self.rect = pygame.Rect((x, y, 80, 180)) #tamanho do retângulo. 80 de largura e 180 de altura
+        self.rect = pygame.Rect((x, y, 100, 240)) #tamanho do retângulo. 80 de largura e 180 de altura
         self.vel_y = 0
         self.jump = False #se não está pulando, False
         self.attacking = False
