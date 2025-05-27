@@ -1,4 +1,5 @@
 import pygame
+import pygame.image
 from figher import Fighter
 
 pygame.init()
@@ -19,9 +20,26 @@ RED = (255, 0, 0)
 YELLOW = (255, 255, 0)
 WHITE = (255, 255, 255)
 
+#define algumas variaves dos bonecos
+WARRIOR_SIZE = 162
+WARRIOR_SCALE = 4
+WARRIOR_OFFSET = [72, 56]
+WARRIOR_DATA = [WARRIOR_SIZE,WARRIOR_SCALE, WARRIOR_OFFSET]
+WIZARD_SIZE = 250
+WIZARD_SCALE = 3
+WIZARD_OFFSET = [112, 107]
+WIZARD_DATA = [WIZARD_SIZE, WIZARD_SCALE, WIZARD_OFFSET]
 
 #carrega imagem de fundo
-background = pygame.image.load("assets/Background/background1.jpeg").convert_alpha()
+background = pygame.image.load("assets/imagens/Background/background1.jpeg").convert_alpha()
+
+#carrega os sprites dos bonecos
+warrior_sheet = pygame.image.load("assets/imagens/warrior/sprites/warrior.png").convert_alpha()
+wizard_sheet = pygame.image.load("assets/imagens/wizard/sprites/wizard.png").convert_alpha()
+
+#define o numero de passos para cada animacao
+WARRIOR_ANIMATIONS_STEPS = [10, 8, 1, 7, 7, 3, 7]
+WIZARD_ANIMATIONS_STEPS = [8, 8, 1, 8, 8, 3, 7]
 
 #função para desenhar o fundo
 def draw_background():
@@ -36,8 +54,8 @@ def draw_health_bar(health, x, y):
     pygame.draw.rect(screen, YELLOW, (x, y, 400 * ratio, 30))
 
 #cria instâncias de jogador
-player_1 = Fighter(200, 310) #posição x e y, para aparecer na tela
-player_2 = Fighter(700, 310)
+player_1 = Fighter(200, 380, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATIONS_STEPS) #posição x e y, para aparecer na tela
+player_2 = Fighter(700, 380, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATIONS_STEPS)
 
 #loop para manter a janela aberta
 run = True  
@@ -57,6 +75,10 @@ while run:
     #move os personagens
     player_1.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_2)
     #player_2.move(SCREEN_WIDTH, SCREEN_HEIGHT, screen, player_1)
+    
+    #atualiza as animacoses
+    player_1.update()
+    player_2.update()
 
     #desenha os lutadores
     player_1.draw(screen)
