@@ -11,7 +11,7 @@ SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Juninho's Fighter")
 
-#define a framerate
+#define a framerat
 clock = pygame.time.Clock()
 fps = 60
 
@@ -26,6 +26,7 @@ last_count_update = pygame.time.get_ticks()
 score = [0, 0]#scores dos players. [p1, p2]
 round_over = False
 ROUND_OVER_COOLDOWN = 2000
+round_over_time = 0
 
 #define algumas variaves dos bonecos
 WARRIOR_SIZE = 162
@@ -119,20 +120,19 @@ while run:
             round_over = True
             round_over_time = pygame.time.get_ticks()
             print(score)
-    elif round_over == False:
-        if player_2.alive == False:
+        elif player_2.alive == False:
             score[0] += 1
             round_over = True
             round_over_time = pygame.time.get_ticks()
     else:
-        #printa a imagem da vitoria
+        #display victory image
         screen.blit(victory_img, (360, 150))
-        if pygame.time.get_ticks() - ROUND_OVER_COOLDOWN:
+        if pygame.time.get_ticks() - round_over_time > ROUND_OVER_COOLDOWN:
             round_over = False
             intro_count = 3
-            player_1 = Fighter(1, 200, 380, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATIONS_STEPS) #posição x e y, para aparecer na tela
+            player_1 = Fighter(1, 200, 380, False, WARRIOR_DATA, warrior_sheet, WARRIOR_ANIMATIONS_STEPS)
             player_2 = Fighter(2, 700, 380, True, WIZARD_DATA, wizard_sheet, WIZARD_ANIMATIONS_STEPS)
-
+      
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False 
