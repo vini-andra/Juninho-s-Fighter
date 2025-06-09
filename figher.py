@@ -154,7 +154,7 @@ class Fighter:
             self.update_action(0)#0: parado
         
         
-        animation_cooldown = 50 #dita a velocidade da animacao
+        animation_cooldown = 40 #dita a velocidade da animacao
         #atualiza as imagens
         self.image = self.animation_list[self.action][self.frame_index]
         #analisa se passou tempo suficiente desde o ultimo update

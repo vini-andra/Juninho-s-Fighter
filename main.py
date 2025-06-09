@@ -15,7 +15,7 @@ pygame.display.set_caption("Juninho's Fighter")
 
 #define a framerat
 clock = pygame.time.Clock()
-fps = 60
+fps = 80
 
 #define as cores
 RED = (255, 0, 0)
